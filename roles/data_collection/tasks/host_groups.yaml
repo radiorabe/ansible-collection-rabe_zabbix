@@ -55,11 +55,17 @@
     state: absent
     host_groups:
       # please keep these alpha sorted in here
-      - Applications
-      - Databases
+      # The "Applications" host group is used by several
+      # host prototypes and can't be removed yet.
+      #- Applications
+      # The "Databases" host group is also used by several
+      # host prototypes and can't be removed yet.
+      #- Databases
       # The "Discovered hosts" host group cannot be deleted
       #- Discovered hosts
       - Hypervisors
       - Linux servers
-      - Virtual machines
+      # The "Virtual machines" host group is used by several
+      # host prototypes and can't be removed yet.
+      #- Virtual machines
       - Zabbix servers
