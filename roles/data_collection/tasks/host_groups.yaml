@@ -6,6 +6,7 @@
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
     ansible_httpapi_validate_certs: false
+    ansible_zabbix_url_path: ''
     ansible_host: '{{ zabbix_api_server_url }}'
   community.zabbix.zabbix_group:
     state: present
@@ -48,9 +49,10 @@
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
     ansible_httpapi_validate_certs: false
+    ansible_zabbix_url_path: ''
     ansible_host: '{{ zabbix_api_server_url }}'
   community.zabbix.zabbix_group:
-    state: present
+    state: absent
     host_groups:
       # please keep these alpha sorted in here
       - Applications
