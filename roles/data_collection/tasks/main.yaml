@@ -1,0 +1,10 @@
+---
+- name: 'RaBe Zabbix : Set API Key'
+  ansible.builtin.set_fact:
+    ansible_zabbix_auth_key: '{{ rabe_zabbix_auth_key }}'
+
+- name: 'RaBe Zabbix Data Collection : Host Group'
+  ansible.builtin.import_tasks: host_groups.yaml
+  tags:
+    - role::rabe_zabbix.data_collection
+    - role::rabe_zabbix.data_collection:host_groups
