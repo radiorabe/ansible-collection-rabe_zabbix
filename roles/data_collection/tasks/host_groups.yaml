@@ -57,7 +57,8 @@
       # please keep these alpha sorted in here
       - Applications
       - Databases
-      - Discovered hosts
+      # The "Discovered hosts" host group cannot be deleted
+      #- Discovered hosts
       - Hypervisors
       - Linux servers
       - Virtual machines
