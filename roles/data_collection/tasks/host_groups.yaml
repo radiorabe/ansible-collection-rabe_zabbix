@@ -1,5 +1,5 @@
 ---
-- name: 'RaBe Zabbix Data Collection : Host Group'
+- name: 'RaBe Zabbix Data Collection : Add Host Groups'
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
@@ -40,3 +40,23 @@
       - 'RaBe: Virtual Machines - P1'
       - 'RaBe: Virtual Machines - P3'
       - 'RaBe: Websites and Webservices - P1'
+
+- name: 'RaBe Zabbix Data Collection : Remove Host Groups'
+  vars:
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: false
+    ansible_host: '{{ zabbix_api_server_url }}'
+  community.zabbix.zabbix_group:
+    state: present
+    host_groups:
+      # please keep these alpha sorted in here
+      - Applications
+      - Databases
+      - Discovered hosts
+      - Hypervisors
+      - Linux servers
+      - Virtual machines
+      - Zabbix servers
