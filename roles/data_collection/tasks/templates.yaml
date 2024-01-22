@@ -1,0 +1,32 @@
+---
+- name: 'RaBe Zabbix : Data Collection : Add Templates'
+  vars:
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: false
+    ansible_zabbix_url_path: ''
+    ansible_host: '{{ zabbix_api_server_url }}'
+  community.zabbix.zabbix_template:
+    state: present
+    template_yaml: |
+      zabbix_export:
+        version: '6.4'
+        templates:
+          - uuid: 192a3c25a4b74cb2b583aaac6a5e5a11
+            template: 'AlmaLinux9 Stack'
+            name: 'AlmaLinux9 Stack'
+            description: |
+              Base stack template for AlmaLinux 9 based systems.
+
+              Managed by <https://github.com/radiorabe/ansible-collection-rabe_zabbix/>.
+            templates:
+              - name: 'Linux by Zabbix agent active'
+              - name: 'Systemd by Zabbix agent 2'
+            groups:
+              - name: Templates/Stacks
+            macros:
+              - macro: '{$SYSTEMD.NAME.SERVICE.NOT_MATCHES}'
+                value: ^(iscsi\.service|mdmonitor\.service|microcode\.service|multipathd\.service|udisks2\.service|selinux-autorelabel-mark\.service|iscsi-onboot\.service|vgauthd\.service|vmtoolsd\.service)$
+                description: 'Filter of systemd service units by name'

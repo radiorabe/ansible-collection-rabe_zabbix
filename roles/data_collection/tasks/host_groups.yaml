@@ -1,5 +1,5 @@
 ---
-- name: 'RaBe Zabbix Data Collection : Add Host Groups'
+- name: 'RaBe Zabbix : Data Collection : Add Host Groups'
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
@@ -42,7 +42,7 @@
       - 'RaBe: Virtual Machines - P3'
       - 'RaBe: Websites and Webservices - P1'
 
-- name: 'RaBe Zabbix Data Collection : Remove Host Groups'
+- name: 'RaBe Zabbix : Data Collection : Remove Host Groups'
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi

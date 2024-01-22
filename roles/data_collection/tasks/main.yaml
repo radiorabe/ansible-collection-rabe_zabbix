@@ -3,7 +3,19 @@
   ansible.builtin.set_fact:
     ansible_zabbix_auth_key: '{{ rabe_zabbix_auth_key }}'
 
-- name: 'RaBe Zabbix Data Collection : Host Group'
+- name: 'RaBe Zabbix : Data Collection : Template Groups'
+  ansible.builtin.import_tasks: template_groups.yaml
+  tags:
+    - role::rabe_zabbix.data_collection
+    - role::rabe_zabbix.data_collection:template_groups
+
+- name: 'RaBe Zabbix : Data Collection : Templates'
+  ansible.builtin.import_tasks: templates.yaml
+  tags:
+    - role::rabe_zabbix.data_collection
+    - role::rabe_zabbix.data_collection:templates
+
+- name: 'RaBe Zabbix : Data Collection : Host Group'
   ansible.builtin.import_tasks: host_groups.yaml
   tags:
     - role::rabe_zabbix.data_collection
