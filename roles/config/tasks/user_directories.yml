@@ -1,0 +1,31 @@
+---
+- name: 'RaBe Zabbix : Config : User Directory : LDAP'
+  vars:
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_zabbix_url_path: ''
+    ansible_host: '{{ zabbix_api_server_url }}'
+  community.zabbix.zabbix_user_directory:
+    state: present
+    name: '{{ item }}'
+    description: "RaBe Login via FreeIPA/LDAP"
+    idp_type: ldap
+    host: '{{ item }}'
+    port: 389
+    start_tls: 1
+    base_dn: "cn=users,cn=accounts,dc=int,dc=rabe,dc=ch"
+    bind_dn: "uid=zabbix,cn=sysaccounts,cn=etc,dc=int,dc=rabe,dc=ch"
+    bind_password: "{{ rabe_zabbix_ldap_user_directory_bind_password }}"
+    search_attribute: "uid"
+    group_membership: memberOf
+    group_name: cn
+    user_username: first_name
+    user_lastname: last_name
+    # disable jit provisioning since it doesn't allow users to configure their own email
+    provision_status: false
+  with_items:
+    - ipa-01.service.int.rabe.ch
+    - ipa-02.service.int.rabe.ch
+    - ipa-03.service.int.rabe.ch

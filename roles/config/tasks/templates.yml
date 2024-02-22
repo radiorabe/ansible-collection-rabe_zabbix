@@ -1,0 +1,55 @@
+---
+- name: 'RaBe Zabbix : Data Collection : Templates : Create Tempdir for Clone'
+  ansible.builtin.tempfile:
+    state: directory
+  changed_when: false
+  delegate_to: 127.0.0.1
+  register: wc
+
+- name: 'RaBe Zabbix : Data Collection : Templates : Clone RaBe Zabbix'
+  ansible.builtin.git:
+    repo: https://github.com/radiorabe/rabe-zabbix.git
+    dest: '{{ wc.path }}'
+    single_branch: yes
+    version: main
+  changed_when: false
+  delegate_to: 127.0.0.1
+
+- name: 'RaBe Zabbix : Data Collection : Templates : Find Templates in Clone'
+  ansible.builtin.find:
+    paths:
+      - '{{ wc.path }}/Stacks'
+      - '{{ wc.path }}/Templates'
+      - '{{ wc.path }}/Overrides'
+    file_type: "file"
+    depth: 5
+    recurse: yes
+    patterns:
+      - "*.yaml"
+    exclude:
+      - "mkdocs.yaml"
+  changed_when: false
+  delegate_to: 127.0.0.1
+  register: templates
+
+- name: 'RaBe Zabbix : Data Collection : Templates : Import Templates'
+  vars:
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_zabbix_url_path: ''
+    ansible_host: '{{ zabbix_api_server_url }}'
+  community.zabbix.zabbix_template:
+    state: present
+    template_yaml: "{{ lookup('ansible.builtin.file', item) }}"
+  with_items: '{{ templates.files | selectattr("path", "match", ".*/6\.4/.*") | map(attribute="path") }}'
+
+- name: 'RaBe Zabbix : Data Collection : Templates : Cleanup Tempdir'
+  ansible.builtin.file:
+    state: absent
+    path: "{{ wc.path }}"
+  when: wc.path is defined
+  changed_when: false
+  delegate_to: 127.0.0.1
+
