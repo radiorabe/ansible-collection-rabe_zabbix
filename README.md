@@ -2,9 +2,13 @@
 
 GitOps our Zabbix. This is where the base of our Zabbix configuration lives.
 
+## Requirements
+
+* Uses the [`community.zabbix`](https://github.com/ansible-collections/community.zabbix) collection > 2.3.0
+
 ## Roles
 
-* [`data_collection`](https://github.com/radiorabe/ansible-collection-rabe_zabbix/tree/main/roles/data_collection) Configure Zabbix data collection (host groups and whatnot)
+* [`config`](https://github.com/radiorabe/ansible-collection-rabe_zabbix/tree/main/roles/config) Configure Zabbix via API
 
 ## Development
 

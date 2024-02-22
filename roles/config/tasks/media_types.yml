@@ -1,0 +1,102 @@
+---
+- name: 'RaBe Zabbix : Config : Media Type : RaBe Email'
+  vars:
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_zabbix_url_path: ''
+    ansible_host: '{{ zabbix_api_server_url }}'
+  community.zabbix.zabbix_mediatype:
+    name: "RaBe Email"
+    type: "email"
+    smtp_server: "217.26.49.65"
+    smtp_helo: '{{ zabbix_api_server_url }}'
+    smtp_email: '{{ rabe_zabbix_smtp_from }}'
+    smtp_authentication: true
+    username: '{{ rabe_zabbix_smtp_from }}'
+    password: "{{ rabe_zabbix_smtp_authentication_password }}"
+    content_type: "plaintext"
+    message_templates:
+      - eventsource: triggers
+        recovery: operations
+        subject: "Problem: {EVENT.NAME}"
+        body: |
+          Problem started at {EVENT.TIME} on {EVENT.DATE}
+          Problem name: {EVENT.NAME}
+          Host: {HOST.NAME}
+          Severity: {EVENT.SEVERITY}
+          Operational data: {EVENT.OPDATA}
+          Original problem ID: {EVENT.ID}
+          {TRIGGER.URL}
+      - eventsource: triggers
+        recovery: recovery_operations
+        subject: "Resolved in {EVENT.DURATION}: {EVENT.NAME}"
+        body: |
+          Problem has been resolved at {EVENT.RECOVERY.TIME} on {EVENT.RECOVERY.DATE}
+          Problem name: {EVENT.NAME}
+          Problem duration: {EVENT.DURATION}
+          Host: {HOST.NAME}
+          Severity: {EVENT.SEVERITY}
+          Original problem ID: {EVENT.ID}
+          {TRIGGER.URL}
+      - eventsource: triggers
+        recovery: update_operations
+        subject: "Updated problem in {EVENT.AGE}: {EVENT.NAME}"
+        body: |
+          {USER.FULLNAME} {EVENT.UPDATE.ACTION} problem at {EVENT.UPDATE.DATE} {EVENT.UPDATE.TIME}.
+          {EVENT.UPDATE.MESSAGE}
+
+          Current problem status is {EVENT.STATUS}, age is {EVENT.AGE}, acknowledged: {EVENT.ACK.STATUS}.
+
+- name: 'RaBe Zabbix : Config : Media Type : RaBe Email (HTML)'
+  vars:
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_zabbix_url_path: ''
+    ansible_host: '{{ zabbix_api_server_url }}'
+  community.zabbix.zabbix_mediatype:
+    name: "RaBe Email (HTML)"
+    type: "email"
+    smtp_server: "217.26.49.65"
+    smtp_helo: '{{ zabbix_api_server_url }}'
+    smtp_email: '{{ rabe_zabbix_smtp_from }}'
+    smtp_authentication: true
+    username: '{{ rabe_zabbix_smtp_from }}'
+    password: "{{ rabe_zabbix_smtp_authentication_password }}"
+    content_type: "html"
+    message_templates:
+      - eventsource: triggers
+        recovery: operations
+        subject: "Problem: {EVENT.NAME}"
+        body: |
+          <b>Problem started</b> at {EVENT.TIME} on {EVENT.DATE}<br>
+          <b>Problem name:</b> {EVENT.NAME}<br>
+          <b>Host:</b> {HOST.NAME}<br>
+          <b>Severity:</b> {EVENT.SEVERITY}<br>
+          <b>Operational data:</b> {EVENT.OPDATA}<br>
+          <b>Original problem ID:</b> {EVENT.ID}<br>
+          {TRIGGER.URL}
+      - eventsource: triggers
+        recovery: recovery_operations
+        subject: "Resolved in {EVENT.DURATION}: {EVENT.NAME}"
+        body: |
+          <b>Problem has been resolved</b> at {EVENT.RECOVERY.TIME} on {EVENT.RECOVERY.DATE}<br>
+          <b>Problem name:</b> {EVENT.NAME}<br>/
+          <b>Problem duration:</b> {EVENT.DURATION}<br>
+          <b>Host:</b> {HOST.NAME}<br>
+          <b>Severity:</b> {EVENT.SEVERITY}<br>
+          <b>Original problem ID:</b> {EVENT.ID}<br>
+          {TRIGGER.URL}
+      - eventsource: triggers
+        recovery: update_operations
+        subject: "Updated problem in {EVENT.AGE}: {EVENT.NAME}"
+        body: |
+          <b>{USER.FULLNAME} {EVENT.UPDATE.ACTION} problem</b> at {EVENT.UPDATE.DATE} {EVENT.UPDATE.TIME}.<br>
+          {EVENT.UPDATE.MESSAGE}<br>
+          <br>
+          <b>Current problem status:</b> {EVENT.STATUS}<br>
+          <b>Age:</b> {EVENT.AGE}<br>
+          <b>Acknowledged:</b> {EVENT.ACK.STATUS}.

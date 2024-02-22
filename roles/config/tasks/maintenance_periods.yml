@@ -1,0 +1,23 @@
+---
+- name: 'RaBe Zabbix : Data Collection : Maintenance Period'
+  vars:
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_zabbix_url_path: ''
+    ansible_host: '{{ zabbix_api_server_url }}'
+  community.zabbix.zabbix_maintenance:
+    state: present
+    name: Maintenance
+    collect_data: true
+    desc: |
+      Maintenance period for all hosts in Maintenance group.
+
+      Managed by <https://github.com/radiorabe/ansible-collection-rabe_zabbix/>.
+    host_groups:
+      - Maintenance
+    active_since: "1970-01-01 01:00"
+    active_till: "2038-01-01"
+
+
