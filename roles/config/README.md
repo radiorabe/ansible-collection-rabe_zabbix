@@ -12,7 +12,7 @@ Manages Infrastructure in Zabbix using Foreman.
 
 ## Dependencies
 
-The `radiorabe.rabe_zabbix.config` role depends on the [`community.zabbix`](https://galaxy.ansible.com/community/zabbix/) collection.
+The `radiorabe.rabe_zabbix.config` role depends on the [`community.zabbix`](https://galaxy.ansible.com/community/zabbix/) collection > 2.3.0
 
 ## Example Playbooks
 

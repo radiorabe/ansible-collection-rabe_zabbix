@@ -1,0 +1,13 @@
+radiorabe_zabbix_agent_server: monitoring.service.int.rabe.ch
+radiorabe_zabbix_agent_serveractive: monitoring.service.int.rabe.ch
+
+_radiorabe_zabbix_agent_package_name: zabbix-agent2
+_radiorabe_zabbix_agent_package_state: present
+
+_radiorabe_zabbix_agent_certificates_rolename: rhel.rhel_system_roles.certificate
+
+_radiorabe_zabbix_agent_zabbix_agent_rolename: community.zabbix.zabbix_agent
+_radiorabe_zabbix_agent_zabbix_agent_tls: cert
+_radiorabe_zabbix_agent_zabbix_agent_cafile: /etc/ipa/ca.crt
+_radiorabe_zabbix_agent_zabbix_agent_tlscertfile: /etc/pki/tls/certs/zabbix-agent.crt
+_radiorabe_zabbix_agent_zabbix_agent_tlskeyfile: /etc/pki/tls/private/zabbix-agent.key
