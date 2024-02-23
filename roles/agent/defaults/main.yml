@@ -4,7 +4,7 @@ radiorabe_zabbix_agent_serveractive: monitoring.service.int.rabe.ch
 _radiorabe_zabbix_agent_package_name: zabbix-agent2
 _radiorabe_zabbix_agent_package_state: present
 
-_radiorabe_zabbix_agent_certificates_rolename: rhel.rhel_system_roles.certificate
+_radiorabe_zabbix_agent_certificates_rolename: redhat.rhel_system_roles.certificate
 
 _radiorabe_zabbix_agent_zabbix_agent_rolename: community.zabbix.zabbix_agent
 _radiorabe_zabbix_agent_zabbix_agent_tls: cert
