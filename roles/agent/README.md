@@ -18,7 +18,7 @@ Opinionated Zabbix agent installation
 
 | Variable | Default |
 | -------- | ------- |
-| `foreman_fqdn` | from [Foreman](https://theforeman.org/) |
+| `foreman.foreman_fqdn` | from [Foreman](https://theforeman.org/) |
 | `radiorabe_core_int_hostname` | from [`radiorabe.common.core`](https://github.com/radiorabe/ansible-collection-common/tree/main/roles/core) |
 
 ## Dependencies

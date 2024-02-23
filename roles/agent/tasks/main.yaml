@@ -16,8 +16,8 @@
       - name: zabbix-agent
         group: zabbix
         ca: ipa
-        dns: "{{ foreman_fqdn }}"
-        principal: "zabbix/{{ foreman_fqdn }}@{{ radiorabe_core_int_hostname | ansible.builtin.upper }}"
+        dns: "{{ foreman.foreman_fqdn }}"
+        principal: "zabbix/{{ foreman.foreman_fqdn }}@{{ radiorabe_core_int_hostname | upper }}"
   ansible.builtin.include_role:
     name: "{{ _radiorabe_zabbix_agent_certificates_rolename }}"
   tags:
@@ -33,16 +33,16 @@
     # config
     zabbix_agent_dont_detect_ip: true
     # environment specific
-    zabbix_agent2_server: "{{ radiorabe_zabbix_server }}"
-    zabbix_agent2_serveractive: "{{ radiorabe_zabbix_serveractive }}"
+    zabbix_agent2_server: "{{ radiorabe_zabbix_agent_server }}"
+    zabbix_agent2_serveractive: "{{ radiorabe_zabbix_agent_serveractive }}"
     # tls
     zabbix_agent2_tlsaccept: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
     zabbix_agent2_tlsconnect: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
     zabbix_agent2_tlscafile: "{{ _radiorabe_zabbix_agent_zabbix_agent_cafile }}"
     zabbix_agent2_tlscertfile: "{{ _radiorabe_zabbix_agent_zabbix_agent_tlscertfile }}"
     zabbix_agent2_tlskeyfile: "{{ _radiorabe_zabbix_agent_zabbix_agent_tlskeyfile }}"
-    zabbix_agent2_tlsservercertissuer: "CN=Certificate Authority,O={{ radiorabe_core_int_hostname | ansible.builtin.upper }}"
-    zabbix_agent2_tlsservercertsubject: "CN={{ radiorabe_zabbix_server }},O={{ radiorabe_core_int_hostname | ansible.builtin.upper }}"
+    zabbix_agent2_tlsservercertissuer: "CN=Certificate Authority,O={{ radiorabe_core_int_hostname | upper }}"
+    zabbix_agent2_tlsservercertsubject: "CN={{ radiorabe_zabbix_agent_server }},O={{ radiorabe_core_int_hostname | upper }}"
   ansible.builtin.include_role:
     name: "{{ _radiorabe_zabbix_agent_zabbix_agent_rolename }}"
   tags:
