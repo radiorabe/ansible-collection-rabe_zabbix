@@ -1,0 +1,50 @@
+---
+
+# NOTE: We install the package from Foreman provided repos mainly so the zabbix user/group is there for certmonger should it be missing
+# Adding more to the installation (like additional agent2 plugins or more binaries) is done in the community.zabbix.zabbix_agent role
+- name: 'RaBe Zabbix : Agent : Pre Install Agent2'
+  ansible.builtin.yum:
+    name: "{{ _radiorabe_zabbix_agent_package_name }}"
+    state: "{{ _radiorabe_zabbix_agent_package_state }}"
+  tags:
+    - role::rabe_zabbix.agent
+    - role::rabe_zabbix.agent.preinstall
+
+- name: 'RaBe Zabbix : Agent : Prepare Agent Certificate'
+  vars:
+    certificate_requests:
+      - name: zabbix-agent
+        group: zabbix
+        ca: ipa
+        dns: "{{ foreman_fqdn }}"
+        principal: "zabbix/{{ foreman_fqdn }}@{{ radiorabe_core_int_hostname | ansible.builtin.upper }}"
+  ansible.builtin.include_role:
+    name: "{{ _radiorabe_zabbix_agent_certificates_rolename }}"
+  tags:
+    - role::rabe_zabbix.agent
+    - role::rabe_zabbix.agent.certificates
+
+- name: 'RaBe Zabbix : Agent : Configure Zabbix Agent2'
+  vars:
+    zabbix_agent2: true
+    # installation related
+    zabbix_repo_yum: []
+    zabbix_install_pip_packages: false
+    # config
+    zabbix_agent_dont_detect_ip: true
+    # environment specific
+    zabbix_agent2_server: "{{ radiorabe_zabbix_server }}"
+    zabbix_agent2_serveractive: "{{ radiorabe_zabbix_serveractive }}"
+    # tls
+    zabbix_agent2_tlsaccept: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
+    zabbix_agent2_tlsconnect: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
+    zabbix_agent2_tlscafile: "{{ _radiorabe_zabbix_agent_zabbix_agent_cafile }}"
+    zabbix_agent2_tlscertfile: "{{ _radiorabe_zabbix_agent_zabbix_agent_tlscertfile }}"
+    zabbix_agent2_tlskeyfile: "{{ _radiorabe_zabbix_agent_zabbix_agent_tlskeyfile }}"
+    zabbix_agent2_tlsservercertissuer: "CN=Certificate Authority,O={{ radiorabe_core_int_hostname | ansible.builtin.upper }}"
+    zabbix_agent2_tlsservercertsubject: "CN={{ radiorabe_zabbix_server }},O={{ radiorabe_core_int_hostname | ansible.builtin.upper }}"
+  ansible.builtin.include_role:
+    name: "{{ _radiorabe_zabbix_agent_zabbix_agent_rolename }}"
+  tags:
+    - role::rabe_zabbix.agent
+    - role::rabe_zabbix.agent.zabbix_agent

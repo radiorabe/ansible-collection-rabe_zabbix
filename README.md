@@ -1,16 +1,13 @@
 # Ansible Collection - radiorabe.rabe_zabbix
 
-GitOps our Zabbix. This is where the base of our Zabbix configuration lives.
+GitOps our Zabbix. This is where the base of our Zabbix installation and core configuration lives.
 
-## Requirements
-
-* Uses the [`community.zabbix`](https://github.com/ansible-collections/community.zabbix) collection > 2.3.0
+You can find the Zabbix templates that the system built with this collection uses in the [RaBe Zabbix](https://radiorabe.github.io/rabe-zabbix/) project.
 
 ## Roles
 
-* [`config`](https://github.com/radiorabe/ansible-collection-rabe_zabbix/tree/main/roles/config) Configure Zabbix via API
-
-## Development
+* [`agent`](https://github.com/radiorabe/ansible-collection-rabe_zabbix/tree/main/roles/agent) Opinionated agent install with Foreman and FreeIPA
+* [`config`](https://github.com/radiorabe/ansible-collection-rabe_zabbix/tree/main/roles/config) Configure Zabbix via API and install our template collection
 
 ## License
 
