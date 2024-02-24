@@ -37,7 +37,7 @@
     zabbix_install_pip_packages: false
     # config
     zabbix_agent_dont_detect_ip: true
-    zabbix_agent2_allow_key: "{{ ( __radiorabe_zabbix_agent_allow_key + (zabbix_agent2_allow_key | default([]) ) | unique }}"
+    zabbix_agent2_allow_key: "{{ ( __radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key ) | unique }}"
     # environment specific
     zabbix_agent2_server: "{{ radiorabe_zabbix_agent_server }}"
     zabbix_agent2_serveractive: "{{ radiorabe_zabbix_agent_serveractive }}"

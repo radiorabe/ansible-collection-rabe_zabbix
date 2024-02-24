@@ -12,7 +12,8 @@ Opinionated Zabbix agent installation
 | Variable | Default |
 | -------- | ------- |
 | `radiorabe_zabbix_agent_server` | `monitoring.service.int.rabe.ch` |
-| `radiorabe_zabbix_agent_serveractive | `monitoring.service.int.rabe.ch` |
+| `radiorabe_zabbix_agent_serveractive` | `monitoring.service.int.rabe.ch` |
+| `radiorabe_zabbix_agent_extra_allow_key` | `[]`, the role add some defaults that are sane for our case |
 
 ### Other Variables
 
