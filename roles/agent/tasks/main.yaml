@@ -1,5 +1,10 @@
 ---
 
+- name: 'RaBe Zabbix : Agent : Get Vars'
+  ansible.builtin.include_vars: "EL{{ ansible_distribution_major_version }}.yml"
+  tags:
+    - always
+
 # NOTE: We install the package from Foreman provided repos mainly so the zabbix user/group is there for certmonger should it be missing
 # Adding more to the installation (like additional agent2 plugins or more binaries) is done in the community.zabbix.zabbix_agent role
 - name: 'RaBe Zabbix : Agent : Pre Install Agent2'
@@ -32,6 +37,7 @@
     zabbix_install_pip_packages: false
     # config
     zabbix_agent_dont_detect_ip: true
+    zabbix_agent2_allow_key: "{{ ( __radiorabe_zabbix_agent_allow_key + (zabbix_agent2_allow_key | default([]) ) | unique }}"
     # environment specific
     zabbix_agent2_server: "{{ radiorabe_zabbix_agent_server }}"
     zabbix_agent2_serveractive: "{{ radiorabe_zabbix_agent_serveractive }}"
