@@ -1,0 +1,5 @@
+---
+__radiorabe_zabbix_agent_allow_key:
+  - system.run[/usr/bin/timedatectl show]
+  - system.run[/usr/bin/chronyc -c activity]
+  - system.run[/usr/bin/chronyc -c tracking]
