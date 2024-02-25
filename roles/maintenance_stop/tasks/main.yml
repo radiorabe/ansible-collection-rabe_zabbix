@@ -1,0 +1,23 @@
+---
+- name: 'RaBe Zabbix : Maintenance Stop : Set Zabbix API Key'
+  ansible.builtin.set_fact:
+    ansible_zabbix_auth_key: '{{ rabe_zabbix_auth_key }}'
+  tags:
+    - always
+
+- name: 'RaBe Zabbix : Maintenance Stop : Unset Maintenance Flag for Host'
+  when: rabe_zabbix_maintenance_not_in_maintenance_before_run
+  vars:
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_zabbix_url_path: ""
+    ansible_host: '{{ zabbix_api_server_url }}'
+  radiorabe.rabe_zabbix.zabbix_host_maintenance:
+    hostid: '{{ rabe_zabbix_maintenance_hostid }}'
+    maintenance: false
+  tags:
+    - role::rabe_zabbix.maintenance
+    - role::rabe_zabbix.maintenance.stop
+

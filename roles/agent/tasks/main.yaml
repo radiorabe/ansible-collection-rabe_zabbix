@@ -1,5 +1,4 @@
 ---
-
 - name: 'RaBe Zabbix : Agent : Get Vars'
   ansible.builtin.include_vars: "EL{{ ansible_distribution_major_version }}.yml"
   tags:
