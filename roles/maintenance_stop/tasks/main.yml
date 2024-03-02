@@ -20,4 +20,3 @@
   tags:
     - role::rabe_zabbix.maintenance
     - role::rabe_zabbix.maintenance.stop
-

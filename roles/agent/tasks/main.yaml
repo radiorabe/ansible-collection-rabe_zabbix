@@ -23,7 +23,7 @@
         dns: "{{ foreman.foreman_fqdn }}"
         principal: "zabbix/{{ foreman.foreman_fqdn }}@{{ radiorabe_core_int_hostname | upper }}"
   ansible.builtin.include_role:
-    name: "{{ _radiorabe_zabbix_agent_certificates_rolename }}"
+    name: "{{ _radiorabe_zabbix_agent_certificate_rolename }}"
   tags:
     - role::rabe_zabbix.agent
     - role::rabe_zabbix.agent.certificates
@@ -34,6 +34,8 @@
     # installation related
     zabbix_repo_yum: []
     zabbix_install_pip_packages: false
+    zabbix_agent_disable_repo: []
+    zabbix_agent_install_agent_only: true
     # config
     zabbix_agent_dont_detect_ip: true
     zabbix_agent2_allow_key: "{{ ( __radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key ) | unique }}"
@@ -53,3 +55,23 @@
   tags:
     - role::rabe_zabbix.agent
     - role::rabe_zabbix.agent.zabbix_agent
+
+- name: 'RaBe Zabbix : Agent : Configure Firewall'
+  include_role:
+    name: "{{ _radiorabe_zabbix_agent_firewall_rolename }}"
+  vars:
+    firewall:
+      - ipset: hgrp_zabbix_servers
+        ipset_type: "hash:ip"
+        short: Zabbix Servers
+        description: set of of all zabbix servers and proxies
+        ipset_entries:
+          - "{{ lookup('dig', radiorabe_zabbix_agent_server) }}"
+        state: present
+        permanent: true
+      - rich_rule: 'rule family="ipv4" source ipset="hgrp_zabbix_servers" service name="zabbix-agent" accept'
+        state: present
+        permanent: true
+  tags:
+    - role::rabe_zabbix.agent
+    - role::rabe_zabbix.agent.firewall
