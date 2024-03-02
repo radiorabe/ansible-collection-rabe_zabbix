@@ -61,17 +61,9 @@
     name: "{{ _radiorabe_zabbix_agent_firewall_rolename }}"
   vars:
     firewall:
-      - ipset: hgrp_zabbix_servers
-        ipset_type: "hash:ip"
-        short: Zabbix Servers
-        description: set of of all zabbix servers and proxies
-        ipset_entries:
-          - "{{ lookup('dig', radiorabe_zabbix_agent_server) }}"
-        state: present
-        permanent: true
-      - rich_rule: 'rule family="ipv4" source ipset="hgrp_zabbix_servers" service name="zabbix-agent" accept'
-        state: present
-        permanent: true
+      - rich_rule: ['rule family="ipv4" source address="{{ lookup("dig", radiorabe_zabbix_agent_server) }}" service name="zabbix-agent" accept']
+        zone: service
+        state: enabled
   tags:
     - role::rabe_zabbix.agent
     - role::rabe_zabbix.agent.firewall
