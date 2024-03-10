@@ -56,12 +56,20 @@
     - role::rabe_zabbix.agent
     - role::rabe_zabbix.agent.zabbix_agent
 
+- name: 'RaBe Zabbix : Agent : Get Server IP for Firewall'
+  ansible.builtin.set_fact:
+    _rabe_zabbix_server_ip: '{{ lookup("dig", radiorabe_zabbix_agent_server) }}'
+  delegate_to: 127.0.0.1
+  tags:
+    - role::rabe_zabbix.agent
+    - role::rabe_zabbix.agent.zabbix_agent
+
 - name: 'RaBe Zabbix : Agent : Configure Firewall'
   include_role:
     name: "{{ _radiorabe_zabbix_agent_firewall_rolename }}"
   vars:
     firewall:
-      - rich_rule: ['rule family="ipv4" source address="{{ lookup("dig", radiorabe_zabbix_agent_server) }}" service name="zabbix-agent" accept']
+      - rich_rule: ['rule family="ipv4" source address="{{ _rabe_zabbix_server_ip }}" service name="zabbix-agent" accept']
         zone: service
         state: enabled
   tags:
