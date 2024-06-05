@@ -62,7 +62,7 @@
     type: "email"
     smtp_server: "217.26.49.65"
     smtp_helo: '{{ zabbix_api_server_url }}'
-    smtp_email: '{{ rabe_zabbix_smtp_from }}'
+    smtp_email: 'RaBe Monitoring <{{ rabe_zabbix_smtp_from }}>'
     smtp_authentication: true
     username: '{{ rabe_zabbix_smtp_from }}'
     password: "{{ rabe_zabbix_smtp_authentication_password }}"
