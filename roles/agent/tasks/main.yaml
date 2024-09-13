@@ -24,6 +24,7 @@
         principal: "zabbix/{{ foreman.foreman_fqdn }}@{{ radiorabe_core_int_hostname | upper }}"
   ansible.builtin.include_role:
     name: "{{ _radiorabe_zabbix_agent_certificate_rolename }}"
+  when: radiorabe_zabbix_agent_generate_cert
   tags:
     - role::rabe_zabbix.agent
     - role::rabe_zabbix.agent.certificates

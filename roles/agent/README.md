@@ -14,6 +14,7 @@ Opinionated Zabbix agent installation
 | `radiorabe_zabbix_agent_server` | `monitoring.service.int.rabe.ch` |
 | `radiorabe_zabbix_agent_serveractive` | `monitoring.service.int.rabe.ch` |
 | `radiorabe_zabbix_agent_extra_allow_key` | `[]`, the role add some defaults that are sane for our case |
+| `radiorabe_zabbix_agent_generate_cert` | `true` |
 
 ### Other Variables
 
