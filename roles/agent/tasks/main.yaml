@@ -73,6 +73,9 @@
     # environment specific
     zabbix_agent_server: "{{ radiorabe_zabbix_agent_server }}"
     zabbix_agent_serveractive: "{{ radiorabe_zabbix_agent_serveractive }}"
+    # psk
+    zabbix_agent_tlsaccept: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
+    zabbix_agent_tlsconnect: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
   ansible.builtin.include_role:
     name: "{{ _radiorabe_zabbix_agent_zabbix_agent_rolename }}"
   when: _radiorabe_zabbix_agent_zabbix_agent_tls == "psk"
