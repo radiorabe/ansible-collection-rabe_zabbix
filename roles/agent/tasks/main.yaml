@@ -29,7 +29,7 @@
     - role::rabe_zabbix.agent
     - role::rabe_zabbix.agent.certificates
 
-- name: 'RaBe Zabbix : Agent : Configure Zabbix Agent2'
+- name: 'RaBe Zabbix : Agent : Configure Zabbix Agent2 with TLS Certificates'
   vars:
     zabbix_agent2: true
     # installation related
@@ -53,9 +53,33 @@
     zabbix_agent_tlsservercertsubject: "CN={{ radiorabe_zabbix_agent_server }},O={{ radiorabe_core_int_hostname | upper }}"
   ansible.builtin.include_role:
     name: "{{ _radiorabe_zabbix_agent_zabbix_agent_rolename }}"
+  when: _radiorabe_zabbix_agent_zabbix_agent_tls == "cert"
   tags:
     - role::rabe_zabbix.agent
     - role::rabe_zabbix.agent.zabbix_agent
+    - role::rabe_zabbix.agent.zabbix_agent.tls
+
+- name: 'RaBe Zabbix : Agent : Configure Zabbix Agent2 with PSK'
+  vars:
+    zabbix_agent2: true
+    # installation related
+    zabbix_repo_yum: []
+    zabbix_install_pip_packages: false
+    zabbix_agent_disable_repo: []
+    zabbix_agent_install_agent_only: true
+    # config
+    zabbix_agent_dont_detect_ip: true
+    zabbix_agent_allowkeys: "{{ ( __radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key ) | unique }}"
+    # environment specific
+    zabbix_agent_server: "{{ radiorabe_zabbix_agent_server }}"
+    zabbix_agent_serveractive: "{{ radiorabe_zabbix_agent_serveractive }}"
+  ansible.builtin.include_role:
+    name: "{{ _radiorabe_zabbix_agent_zabbix_agent_rolename }}"
+  when: _radiorabe_zabbix_agent_zabbix_agent_tls == "psk"
+  tags:
+    - role::rabe_zabbix.agent
+    - role::rabe_zabbix.agent.zabbix_agent
+    - role::rabe_zabbix.agent.zabbix_agent.psk
 
 - name: 'RaBe Zabbix : Agent : Get Server IP for Firewall'
   ansible.builtin.set_fact:
