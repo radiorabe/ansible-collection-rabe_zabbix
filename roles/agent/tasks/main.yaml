@@ -41,8 +41,8 @@
     zabbix_agent_dont_detect_ip: true
     zabbix_agent2_allow_key: "{{ ( __radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key ) | unique }}"
     # environment specific
-    zabbix_agent2_server: "{{ radiorabe_zabbix_agent_server }}"
-    zabbix_agent2_serveractive: "{{ radiorabe_zabbix_agent_serveractive }}"
+    zabbix_agent_server: "{{ radiorabe_zabbix_agent_server }}"
+    zabbix_agent_serveractive: "{{ radiorabe_zabbix_agent_serveractive }}"
     # tls
     zabbix_agent2_tlsaccept: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
     zabbix_agent2_tlsconnect: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
