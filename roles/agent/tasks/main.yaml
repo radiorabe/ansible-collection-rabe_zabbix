@@ -39,18 +39,18 @@
     zabbix_agent_install_agent_only: true
     # config
     zabbix_agent_dont_detect_ip: true
-    zabbix_agent2_allow_key: "{{ ( __radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key ) | unique }}"
+    zabbix_agent_allowkeys: "{{ ( __radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key ) | unique }}"
     # environment specific
     zabbix_agent_server: "{{ radiorabe_zabbix_agent_server }}"
     zabbix_agent_serveractive: "{{ radiorabe_zabbix_agent_serveractive }}"
     # tls
-    zabbix_agent2_tlsaccept: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
-    zabbix_agent2_tlsconnect: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
-    zabbix_agent2_tlscafile: "{{ _radiorabe_zabbix_agent_zabbix_agent_cafile }}"
-    zabbix_agent2_tlscertfile: "{{ _radiorabe_zabbix_agent_zabbix_agent_tlscertfile }}"
-    zabbix_agent2_tlskeyfile: "{{ _radiorabe_zabbix_agent_zabbix_agent_tlskeyfile }}"
-    zabbix_agent2_tlsservercertissuer: "CN=Certificate Authority,O={{ radiorabe_core_int_hostname | upper }}"
-    zabbix_agent2_tlsservercertsubject: "CN={{ radiorabe_zabbix_agent_server }},O={{ radiorabe_core_int_hostname | upper }}"
+    zabbix_agent_tlsaccept: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
+    zabbix_agent_tlsconnect: "{{ _radiorabe_zabbix_agent_zabbix_agent_tls }}"
+    zabbix_agent_tlscafile: "{{ _radiorabe_zabbix_agent_zabbix_agent_cafile }}"
+    zabbix_agent_tlscertfile: "{{ _radiorabe_zabbix_agent_zabbix_agent_tlscertfile }}"
+    zabbix_agent_tlskeyfile: "{{ _radiorabe_zabbix_agent_zabbix_agent_tlskeyfile }}"
+    zabbix_agent_tlsservercertissuer: "CN=Certificate Authority,O={{ radiorabe_core_int_hostname | upper }}"
+    zabbix_agent_tlsservercertsubject: "CN={{ radiorabe_zabbix_agent_server }},O={{ radiorabe_core_int_hostname | upper }}"
   ansible.builtin.include_role:
     name: "{{ _radiorabe_zabbix_agent_zabbix_agent_rolename }}"
   tags:
