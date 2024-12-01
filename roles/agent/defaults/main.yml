@@ -14,3 +14,5 @@ _radiorabe_zabbix_agent_zabbix_agent_tls: cert
 _radiorabe_zabbix_agent_zabbix_agent_cafile: /etc/ipa/ca.crt
 _radiorabe_zabbix_agent_zabbix_agent_tlscertfile: /etc/pki/tls/certs/zabbix-agent.crt
 _radiorabe_zabbix_agent_zabbix_agent_tlskeyfile: /etc/pki/tls/private/zabbix-agent.key
+
+_radiorabe_zabbix_agent_firewall_zone: service

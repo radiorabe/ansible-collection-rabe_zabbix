@@ -98,7 +98,7 @@
   vars:
     firewall:
       - rich_rule: ['rule family="ipv4" source address="{{ _rabe_zabbix_server_ip }}" service name="zabbix-agent" accept']
-        zone: service
+        zone: "{{ _radiorabe_zabbix_agent_firewall_zone }}"
         state: enabled
   tags:
     - role::rabe_zabbix.agent
