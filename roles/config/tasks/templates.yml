@@ -43,7 +43,7 @@
   community.zabbix.zabbix_template:
     state: present
     template_yaml: "{{ lookup('ansible.builtin.file', item) }}"
-  with_items: '{{ templates.files | selectattr("path", "match", ".*/6\.4/.*") | map(attribute="path") }}'
+  with_items: '{{ templates.files | selectattr("path", "match", ".*/7\.0/.*") | map(attribute="path") }}'
 
 - name: 'RaBe Zabbix : Data Collection : Templates : Cleanup Tempdir'
   ansible.builtin.file:
