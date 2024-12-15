@@ -3,16 +3,18 @@
   ansible.builtin.tempfile:
     state: directory
   changed_when: false
+  check_mode: false
   delegate_to: 127.0.0.1
   register: wc
 
 - name: 'RaBe Zabbix : Data Collection : Templates : Clone RaBe Zabbix'
   ansible.builtin.git:
-    repo: https://github.com/radiorabe/rabe-zabbix.git
+    repo: git@github.com:radiorabe/rabe-zabbix.git
     dest: '{{ wc.path }}'
     single_branch: yes
     version: main
   changed_when: false
+  check_mode: false
   delegate_to: 127.0.0.1
 
 - name: 'RaBe Zabbix : Data Collection : Templates : Find Templates in Clone'
@@ -29,6 +31,7 @@
     exclude:
       - "mkdocs.yaml"
   changed_when: false
+  check_mode: false
   delegate_to: 127.0.0.1
   register: templates
 
@@ -50,6 +53,7 @@
     state: absent
     path: "{{ wc.path }}"
   when: wc.path is defined
+  check_mode: false
   changed_when: false
   delegate_to: 127.0.0.1
 
