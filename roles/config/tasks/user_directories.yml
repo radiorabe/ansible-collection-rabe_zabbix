@@ -1,4 +1,11 @@
 ---
+- name: 'RaBe Zabbix : Config : User Directory : Allow LDAP in SELinux'
+  ansible.posix.seboolean:
+    name: httpd_can_connect_ldap
+    state: on
+    persistent: true
+  become: true
+
 - name: 'RaBe Zabbix : Config : User Directory : LDAP'
   vars:
     ansible_network_os: community.zabbix.zabbix
