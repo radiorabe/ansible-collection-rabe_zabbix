@@ -1,25 +1,25 @@
 ---
-- name: 'RaBe Zabbix : Config : User Directory : Allow LDAP in SELinux'
+- name: "RaBe Zabbix : Config : User Directory : Allow LDAP in SELinux"
   ansible.posix.seboolean:
     name: httpd_can_connect_ldap
-    state: on
+    state: true
     persistent: true
   become: true
 
-- name: 'RaBe Zabbix : Config : User Directory : LDAP'
+- name: "RaBe Zabbix : Config : User Directory : LDAP"
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
-    ansible_zabbix_url_path: ''
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_zabbix_url_path: ""
+    ansible_host: "{{ zabbix_api_server_url }}"
   community.zabbix.zabbix_user_directory:
     state: present
-    name: '{{ item }}'
+    name: "{{ item }}"
     description: "RaBe Login via FreeIPA/LDAP"
     idp_type: ldap
-    host: '{{ item }}'
+    host: "{{ item }}"
     port: 389
     start_tls: 1
     base_dn: "cn=users,cn=accounts,dc=int,dc=rabe,dc=ch"

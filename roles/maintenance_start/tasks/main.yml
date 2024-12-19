@@ -1,40 +1,40 @@
 ---
-- name: 'RaBe Zabbix : Maintenance Start : Set Zabbix API Key'
+- name: "RaBe Zabbix : Maintenance Start : Set Zabbix API Key"
   ansible.builtin.set_fact:
-    ansible_zabbix_auth_key: '{{ rabe_zabbix_auth_key }}'
+    ansible_zabbix_auth_key: "{{ rabe_zabbix_auth_key }}"
   tags:
     - always
 
-- name: 'RaBe Zabbix : Maintenance Start : Get Host Info'
+- name: "RaBe Zabbix : Maintenance Start : Get Host Info"
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
     ansible_zabbix_url_path: ""
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_host: "{{ zabbix_api_server_url }}"
   community.zabbix.zabbix_host_info:
     host_name: "{{ foreman.foreman_fqdn }}"
-    exact_match: yes
+    exact_match: true
   register: _rabe_zabbix_maintenance_host_info
   tags:
     - role::rabe_zabbix.maintenance
 
-- name: 'RaBe Zabbix : Maintenance Start : Sanity Check Host Info'
+- name: "RaBe Zabbix : Maintenance Start : Sanity Check Host Info"
   ansible.builtin.assert:
     that:
       - "(_rabe_zabbix_maintenance_host_info.hosts|length) == 1"
   tags:
     - role::rabe_zabbix.maintenance
 
-- name: 'RaBe Zabbix : Maintenance Start : Set Host Maintenance Facts'
+- name: "RaBe Zabbix : Maintenance Start : Set Host Maintenance Facts"
   ansible.builtin.set_fact:
-    rabe_zabbix_maintenance_hostid: '{{ _rabe_zabbix_maintenance_host_info.hosts[0].hostid }}'
+    rabe_zabbix_maintenance_hostid: "{{ _rabe_zabbix_maintenance_host_info.hosts[0].hostid }}"
     rabe_zabbix_maintenance_not_in_maintenance_before_run: '{{ _rabe_zabbix_maintenance_host_info.hosts[0].maintenance_status == "0" }}'
   tags:
     - role::rabe_zabbix.maintenance
 
-- name: 'RaBe Zabbix : Maintenance Start : Set Maintenance Flag for Host'
+- name: "RaBe Zabbix : Maintenance Start : Set Maintenance Flag for Host"
   when: rabe_zabbix_maintenance_not_in_maintenance_before_run
   vars:
     ansible_network_os: community.zabbix.zabbix
@@ -42,9 +42,9 @@
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
     ansible_zabbix_url_path: ""
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_host: "{{ zabbix_api_server_url }}"
   radiorabe.rabe_zabbix.zabbix_host_maintenance:
-    hostid: '{{ rabe_zabbix_maintenance_hostid }}'
+    hostid: "{{ rabe_zabbix_maintenance_hostid }}"
     maintenance: true
   tags:
     - role::rabe_zabbix.maintenance

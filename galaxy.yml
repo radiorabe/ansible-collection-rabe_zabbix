@@ -1,3 +1,4 @@
+---
 namespace: radiorabe
 name: rabe_zabbix
 version: 0.0.0
@@ -9,6 +10,7 @@ license_file: LICENSE
 tags:
   - radiorabe
   - zabbix
+  - application
 dependencies:
   community.zabbix: ">=1.9.0"
 repository: https://github.com/radiorabe/ansible-collection-rabe_zabbix

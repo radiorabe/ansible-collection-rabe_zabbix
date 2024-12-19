@@ -1,17 +1,17 @@
 ---
-- name: 'RaBe Zabbix : Data Collection : Template Groups'
+- name: "RaBe Zabbix : Data Collection : Template Groups"
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
-    ansible_zabbix_url_path: ''
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_zabbix_url_path: ""
+    ansible_host: "{{ zabbix_api_server_url }}"
   community.zabbix.zabbix_templategroup:
     state: present
     template_groups:
-      - 'Stacks'
-      - 'Stacks/Applications'
-      - 'Stacks/Operating systems'
-      - 'Stacks/Servers'
-      - 'Stacks/Systems'
+      - "Stacks"
+      - "Stacks/Applications"
+      - "Stacks/Operating systems"
+      - "Stacks/Servers"
+      - "Stacks/Systems"

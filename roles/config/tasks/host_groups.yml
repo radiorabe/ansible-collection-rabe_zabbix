@@ -1,5 +1,5 @@
 ---
-- name: 'RaBe Zabbix : Data Collection : Host Groups : Generate List of all Groups'
+- name: "RaBe Zabbix : Data Collection : Host Groups : Generate List of all Groups"
   ansible.builtin.set_fact:
     _radiorabe_zabbix_config_host_groups_full_list: >-
       {{ (radiorabe_zabbix_categories | map('regex_replace', '^', radiorabe_zabbix_prefix) | map('regex_replace', '$', ' - P1') | list) +
@@ -7,41 +7,41 @@
          (radiorabe_zabbix_categories | map('regex_replace', '^', radiorabe_zabbix_prefix) | map('regex_replace', '$', ' - P3') | list) +
          ['Maintenance'] }}
 
-- name: 'RaBe Zabbix : Data Collection : Host Groups : Add Host Groups'
+- name: "RaBe Zabbix : Data Collection : Host Groups : Add Host Groups"
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
-    ansible_zabbix_url_path: ''
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_zabbix_url_path: ""
+    ansible_host: "{{ zabbix_api_server_url }}"
   community.zabbix.zabbix_group:
     state: present
     host_groups: "{{ _radiorabe_zabbix_config_host_groups_full_list }}"
 
-- name: 'RaBe Zabbix : Data Collection : Host Groups : Remove Host Groups'
+- name: "RaBe Zabbix : Data Collection : Host Groups : Remove Host Groups"
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
-    ansible_zabbix_url_path: ''
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_zabbix_url_path: ""
+    ansible_host: "{{ zabbix_api_server_url }}"
   community.zabbix.zabbix_group:
     state: absent
     host_groups:
       # please keep these alpha sorted in here
       # The "Applications" host group is used by several
       # host prototypes and can't be removed yet.
-      #- Applications
+      # - Applications
       # The "Databases" host group is also used by several
       # host prototypes and can't be removed yet.
-      #- Databases
+      # - Databases
       # The "Discovered hosts" host group cannot be deleted
-      #- Discovered hosts
+      # - Discovered hosts
       - Hypervisors
       - Linux servers
       # The "Virtual machines" host group is used by several
       # host prototypes and can't be removed yet.
-      #- Virtual machines
+      # - Virtual machines
       - Zabbix servers

@@ -1,20 +1,20 @@
 ---
-- name: 'RaBe Zabbix : Config : Media Type : RaBe Email'
+- name: "RaBe Zabbix : Config : Media Type : RaBe Email"
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
-    ansible_zabbix_url_path: ''
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_zabbix_url_path: ""
+    ansible_host: "{{ zabbix_api_server_url }}"
   community.zabbix.zabbix_mediatype:
     name: "RaBe Email"
     type: "email"
     smtp_server: "217.26.49.65"
-    smtp_helo: '{{ zabbix_api_server_url }}'
-    smtp_email: 'RaBe Monitoring <{{ rabe_zabbix_smtp_from }}>'
+    smtp_helo: "{{ zabbix_api_server_url }}"
+    smtp_email: "RaBe Monitoring <{{ rabe_zabbix_smtp_from }}>"
     smtp_authentication: true
-    username: '{{ rabe_zabbix_smtp_from }}'
+    username: "{{ rabe_zabbix_smtp_from }}"
     password: "{{ rabe_zabbix_smtp_authentication_password }}"
     content_type: "plaintext"
     message_templates:
@@ -49,22 +49,22 @@
 
           Current problem status is {EVENT.STATUS}, age is {EVENT.AGE}, acknowledged: {EVENT.ACK.STATUS}.
 
-- name: 'RaBe Zabbix : Config : Media Type : RaBe Email (HTML)'
+- name: "RaBe Zabbix : Config : Media Type : RaBe Email (HTML)"
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
-    ansible_zabbix_url_path: ''
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_zabbix_url_path: ""
+    ansible_host: "{{ zabbix_api_server_url }}"
   community.zabbix.zabbix_mediatype:
     name: "RaBe Email (HTML)"
     type: "email"
     smtp_server: "217.26.49.65"
-    smtp_helo: '{{ zabbix_api_server_url }}'
-    smtp_email: 'RaBe Monitoring <{{ rabe_zabbix_smtp_from }}>'
+    smtp_helo: "{{ zabbix_api_server_url }}"
+    smtp_email: "RaBe Monitoring <{{ rabe_zabbix_smtp_from }}>"
     smtp_authentication: true
-    username: '{{ rabe_zabbix_smtp_from }}'
+    username: "{{ rabe_zabbix_smtp_from }}"
     password: "{{ rabe_zabbix_smtp_authentication_password }}"
     content_type: "html"
     message_templates:
