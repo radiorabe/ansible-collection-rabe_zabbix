@@ -1,20 +1,20 @@
 ---
-- name: 'RaBe Zabbix : Agent : Get Vars'
+- name: "RaBe Zabbix : Agent : Get Vars"
   ansible.builtin.include_vars: "EL{{ ansible_distribution_major_version }}.yml"
   tags:
     - always
 
 # NOTE: We install the package from Foreman provided repos mainly so the zabbix user/group is there for certmonger should it be missing
 # Adding more to the installation (like additional agent2 plugins or more binaries) is done in the community.zabbix.zabbix_agent role
-- name: 'RaBe Zabbix : Agent : Pre Install Agent2'
-  ansible.builtin.yum:
+- name: "RaBe Zabbix : Agent : Pre Install Agent2"
+  ansible.builtin.dnf:
     name: "{{ _radiorabe_zabbix_agent_package_name }}"
     state: "{{ _radiorabe_zabbix_agent_package_state }}"
   tags:
     - role::rabe_zabbix.agent
     - role::rabe_zabbix.agent.preinstall
 
-- name: 'RaBe Zabbix : Agent : Prepare Agent Certificate'
+- name: "RaBe Zabbix : Agent : Prepare Agent Certificate"
   vars:
     certificate_requests:
       - name: zabbix-agent
@@ -29,7 +29,7 @@
     - role::rabe_zabbix.agent
     - role::rabe_zabbix.agent.certificates
 
-- name: 'RaBe Zabbix : Agent : Configure Zabbix Agent2 with TLS Certificates'
+- name: "RaBe Zabbix : Agent : Configure Zabbix Agent2 with TLS Certificates"
   vars:
     zabbix_agent2: true
     # installation related
@@ -39,7 +39,7 @@
     zabbix_agent_install_agent_only: true
     # config
     zabbix_agent_dont_detect_ip: true
-    zabbix_agent_allowkeys: "{{ ( __radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key ) | unique }}"
+    zabbix_agent_allowkeys: "{{ (__radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key) | unique }}"
     # environment specific
     zabbix_agent_server: "{{ radiorabe_zabbix_agent_server }}"
     zabbix_agent_serveractive: "{{ radiorabe_zabbix_agent_serveractive }}"
@@ -59,7 +59,7 @@
     - role::rabe_zabbix.agent.zabbix_agent
     - role::rabe_zabbix.agent.zabbix_agent.tls
 
-- name: 'RaBe Zabbix : Agent : Configure Zabbix Agent2 with PSK'
+- name: "RaBe Zabbix : Agent : Configure Zabbix Agent2 with PSK"
   vars:
     zabbix_agent2: true
     # installation related
@@ -69,7 +69,7 @@
     zabbix_agent_install_agent_only: true
     # config
     zabbix_agent_dont_detect_ip: true
-    zabbix_agent_allowkeys: "{{ ( __radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key ) | unique }}"
+    zabbix_agent_allowkeys: "{{ (__radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key) | unique }}"
     # environment specific
     zabbix_agent_server: "{{ radiorabe_zabbix_agent_server }}"
     zabbix_agent_serveractive: "{{ radiorabe_zabbix_agent_serveractive }}"
@@ -84,7 +84,7 @@
     - role::rabe_zabbix.agent.zabbix_agent
     - role::rabe_zabbix.agent.zabbix_agent.psk
 
-- name: 'RaBe Zabbix : Agent : Get Server IP for Firewall'
+- name: "RaBe Zabbix : Agent : Get Server IP for Firewall"
   ansible.builtin.set_fact:
     _rabe_zabbix_server_ip: '{{ lookup("dig", radiorabe_zabbix_agent_server) }}'
   delegate_to: 127.0.0.1
@@ -92,8 +92,8 @@
     - role::rabe_zabbix.agent
     - role::rabe_zabbix.agent.zabbix_agent
 
-- name: 'RaBe Zabbix : Agent : Configure Firewall'
-  include_role:
+- name: "RaBe Zabbix : Agent : Configure Firewall"
+  ansible.builtin.include_role:
     name: "{{ _radiorabe_zabbix_agent_firewall_rolename }}"
   vars:
     firewall:

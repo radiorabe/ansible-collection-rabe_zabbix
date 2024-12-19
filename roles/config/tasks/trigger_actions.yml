@@ -1,27 +1,27 @@
 ---
-- name: 'RaBe Zabbix : Config : Trigger Actions : Remove default action from Zabbix installation'
+- name: "RaBe Zabbix : Config : Trigger Actions : Remove default action from Zabbix installation"
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
-    ansible_zabbix_url_path: ''
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_zabbix_url_path: ""
+    ansible_host: "{{ zabbix_api_server_url }}"
   community.zabbix.zabbix_action:
-    name: 'Report problems to Zabbix administrators'
+    name: "Report problems to Zabbix administrators"
     state: absent
     event_source: "trigger"
 
-- name: 'RaBe Zabbix : Config : Trigger Actions : Create P1 Actions'
+- name: "RaBe Zabbix : Config : Trigger Actions : Create P1 Actions"
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
-    ansible_zabbix_url_path: ''
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_zabbix_url_path: ""
+    ansible_host: "{{ zabbix_api_server_url }}"
   community.zabbix.zabbix_action:
-    name: 'Alert Users of {{ item }} P1'
+    name: "Alert Users of {{ item }} P1"
     event_source: "trigger"
     state: present
     status: enabled
@@ -35,37 +35,37 @@
         value: "Maintenance"
       - type: "host_group"
         operator: "="
-        value: '{{ item }} - P1'
+        value: "{{ item }} - P1"
     operations:
       - type: send_message
         media_type: all
         send_to_groups:
-          - 'Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P1'
-          - 'Users of {{ item }} - P1'
+          - "Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P1"
+          - "Users of {{ item }} - P1"
     recovery_operations:
       - type: send_message
         media_type: all
         send_to_groups:
-          - 'Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P1'
-          - 'Users of {{ item }} - P1'
+          - "Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P1"
+          - "Users of {{ item }} - P1"
     acknowledge_operations:
       - type: send_message
         media_type: all
         send_to_groups:
-          - 'Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P1'
-          - 'Users of {{ item }} - P1'
+          - "Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P1"
+          - "Users of {{ item }} - P1"
   with_items: "{{ radiorabe_zabbix_categories | map('regex_replace', '^', radiorabe_zabbix_prefix) | list }}"
 
-- name: 'RaBe Zabbix : Config : Trigger Actions : Create P2 Actions'
+- name: "RaBe Zabbix : Config : Trigger Actions : Create P2 Actions"
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 443
     ansible_httpapi_use_ssl: true
-    ansible_zabbix_url_path: ''
-    ansible_host: '{{ zabbix_api_server_url }}'
+    ansible_zabbix_url_path: ""
+    ansible_host: "{{ zabbix_api_server_url }}"
   community.zabbix.zabbix_action:
-    name: 'Alert Users of {{ item }} P2'
+    name: "Alert Users of {{ item }} P2"
     event_source: "trigger"
     state: present
     status: enabled
@@ -79,23 +79,23 @@
         value: "Maintenance"
       - type: "host_group"
         operator: "="
-        value: '{{ item }} - P2'
+        value: "{{ item }} - P2"
     operations:
       - type: send_message
         media_type: all
         send_to_groups:
-          - 'Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P2'
-          - 'Users of {{ item }} - P2'
+          - "Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P2"
+          - "Users of {{ item }} - P2"
     recovery_operations:
       - type: send_message
         media_type: all
         send_to_groups:
-          - 'Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P2'
-          - 'Users of {{ item }} - P2'
+          - "Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P2"
+          - "Users of {{ item }} - P2"
     acknowledge_operations:
       - type: send_message
         media_type: all
         send_to_groups:
-          - 'Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P2'
-          - 'Users of {{ item }} - P2'
+          - "Users of {{ radiorabe_zabbix_prefix + radiorabe_zabbix_mod_name }} - P2"
+          - "Users of {{ item }} - P2"
   with_items: "{{ radiorabe_zabbix_categories | map('regex_replace', '^', radiorabe_zabbix_prefix) | list }}"

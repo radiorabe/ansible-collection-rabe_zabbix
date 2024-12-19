@@ -1,39 +1,40 @@
-radiorabe_zabbix_prefix: 'RaBe: '
-radiorabe_zabbix_mod_name: 'Manager on Duty'
+---
+radiorabe_zabbix_prefix: "RaBe: "
+radiorabe_zabbix_mod_name: "Manager on Duty"
 radiorabe_zabbix_categories:
-  # please keep these alpha sorted in here
-  - 'Axia Audio Devices'
-  - 'Network Gateways'
-  - 'Network Switches'
-  - 'Network WLAN APs'
-  - 'Physical Office PCs'
-  - 'Physical Player PCs'
-  - 'Physical Servers'
-  - 'Service Audio Archive'
-  - 'Service Audio Monitoring'
-  - 'Service Audio Streaming'
-  - 'Service Backup'
-  - 'Service DAB'
-  - 'Service Divers'
-  - 'Service Foreman'
-  - 'Service FreeIPA'
-  - 'Service Kanboard'
-  - 'Service Klangbecken'
-  - 'Service Libretime'
-  - 'Service Logging'
-  - 'Service MinIO'
-  - 'Service Monitoring'
-  - 'Service Netbox'
-  - 'Service Outside Broadcast'
-  - 'Service ownCloud'
-  - 'Service oVirt'
-  - 'Service PostgreSQL'
-  - 'Service Songticker'
-  - 'Service Studiomail'
-  - 'Service Studio WallTime'
-  - 'Service SUISA Sendemeldung'
-  - 'Service Wiki'
-  - 'Unintrpl. Power Supply'
-  - 'Virtual Machines'
-  - 'Websites and Webservices'
-  - 'Windows Servers'
+  #  please keep these alpha sorted in here
+  - "Axia Audio Devices"
+  - "Network Gateways"
+  - "Network Switches"
+  - "Network WLAN APs"
+  - "Physical Office PCs"
+  - "Physical Player PCs"
+  - "Physical Servers"
+  - "Service Audio Archive"
+  - "Service Audio Monitoring"
+  - "Service Audio Streaming"
+  - "Service Backup"
+  - "Service DAB"
+  - "Service Divers"
+  - "Service Foreman"
+  - "Service FreeIPA"
+  - "Service Kanboard"
+  - "Service Klangbecken"
+  - "Service Libretime"
+  - "Service Logging"
+  - "Service MinIO"
+  - "Service Monitoring"
+  - "Service Netbox"
+  - "Service Outside Broadcast"
+  - "Service ownCloud"
+  - "Service oVirt"
+  - "Service PostgreSQL"
+  - "Service Songticker"
+  - "Service Studiomail"
+  - "Service Studio WallTime"
+  - "Service SUISA Sendemeldung"
+  - "Service Wiki"
+  - "Unintrpl. Power Supply"
+  - "Virtual Machines"
+  - "Websites and Webservices"
+  - "Windows Servers"

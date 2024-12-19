@@ -1,59 +1,59 @@
 ---
-- name: 'RaBe Zabbix : Config : Set Zabbix API Key'
+- name: "RaBe Zabbix : Config : Set Zabbix API Key"
   ansible.builtin.set_fact:
-    ansible_zabbix_auth_key: '{{ rabe_zabbix_auth_key }}'
+    ansible_zabbix_auth_key: "{{ rabe_zabbix_auth_key }}"
   tags:
     - always
 
-- name: 'RaBe Zabbix : Config : Media Types'
+- name: "RaBe Zabbix : Config : Media Types"
   ansible.builtin.import_tasks: media_types.yml
   tags:
     - role::rabe_zabbix.config
     - role::rabe_zabbix.config:media_types
 
-- name: 'RaBe Zabbix : Config : User Directories'
+- name: "RaBe Zabbix : Config : User Directories"
   ansible.builtin.import_tasks: user_directories.yml
   tags:
     - role::rabe_zabbix.config
     - role::rabe_zabbix.config:user_directory
 
-- name: 'RaBe Zabbix : Config : User Groups'
+- name: "RaBe Zabbix : Config : User Groups"
   ansible.builtin.import_tasks: user_groups.yml
   tags:
     - role::rabe_zabbix.config
     - role::rabe_zabbix.config:user_groups
 
-- name: 'RaBe Zabbix : Config : Template Groups'
+- name: "RaBe Zabbix : Config : Template Groups"
   ansible.builtin.import_tasks: template_groups.yml
   tags:
     - role::rabe_zabbix.config
     - role::rabe_zabbix.config:template_groups
 
-- name: 'RaBe Zabbix : Config : Templates'
+- name: "RaBe Zabbix : Config : Templates"
   ansible.builtin.import_tasks: templates.yml
   tags:
     - role::rabe_zabbix.config
     - role::rabe_zabbix.config:templates
 
-- name: 'RaBe Zabbix : Config : Host Group'
+- name: "RaBe Zabbix : Config : Host Group"
   ansible.builtin.import_tasks: host_groups.yml
   tags:
     - role::rabe_zabbix.config
     - role::rabe_zabbix.config:host_groups
 
-- name: 'RaBe Zabbix : Config : Maintenance'
+- name: "RaBe Zabbix : Config : Maintenance"
   ansible.builtin.import_tasks: maintenance_periods.yml
   tags:
     - role::rabe_zabbix.config
     - role::rabe_zabbix.config:maintenance_periods
 
-- name: 'RaBe Zabbix : Config : Trigger Actions'
+- name: "RaBe Zabbix : Config : Trigger Actions"
   ansible.builtin.import_tasks: trigger_actions.yml
   tags:
     - role::rabe_zabbix.config
     - role::rabe_zabbix.config:trigger_actions
 
-- name: 'RaBe Zabbix : Config : Authentication'
+- name: "RaBe Zabbix : Config : Authentication"
   ansible.builtin.import_tasks: authentication.yml
   tags:
     - role::rabe_zabbix.config
