@@ -1,10 +1,13 @@
 ---
 - name: "RaBe Zabbix : Config : User Directory : Allow LDAP in SELinux"
   ansible.posix.seboolean:
-    name: httpd_can_connect_ldap
+    name: "{{ item }}"
     state: true
     persistent: true
   become: true
+  with_items:
+    - httpd_can_connect_ldap
+    - authlogin_nsswitch_use_ldap
 
 - name: "RaBe Zabbix : Config : User Directory : LDAP"
   vars:
