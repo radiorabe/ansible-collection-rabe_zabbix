@@ -34,6 +34,7 @@ radiorabe_zabbix_categories:
   - "Service Studio WallTime"
   - "Service SUISA Sendemeldung"
   - "Service Wiki"
+  - "Service WWW"
   - "Unintrpl. Power Supply"
   - "Virtual Machines"
   - "Websites and Webservices"
