@@ -6,6 +6,7 @@ radiorabe_zabbix_agent_generate_cert: true
 
 _radiorabe_zabbix_agent_package_name: zabbix-agent2
 _radiorabe_zabbix_agent_package_state: present
+_radiorabe_zabbix_agent_version: "7"
 
 _radiorabe_zabbix_agent_certificate_rolename: redhat.rhel_system_roles.certificate
 _radiorabe_zabbix_agent_firewall_rolename: redhat.rhel_system_roles.firewall

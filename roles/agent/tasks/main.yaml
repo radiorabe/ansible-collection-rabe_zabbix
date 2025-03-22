@@ -37,6 +37,7 @@
     zabbix_install_pip_packages: false
     zabbix_agent_disable_repo: []
     zabbix_agent_install_agent_only: true
+    zabbix_agent_version: "{{ _radiorabe_zabbix_agent_version }}"
     # config
     zabbix_agent_dont_detect_ip: true
     zabbix_agent_allowkeys: "{{ (__radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key) | unique }}"
@@ -67,6 +68,7 @@
     zabbix_install_pip_packages: false
     zabbix_agent_disable_repo: []
     zabbix_agent_install_agent_only: true
+    zabbix_agent_version: "{{ _radiorabe_zabbix_agent_version }}"
     # config
     zabbix_agent_dont_detect_ip: true
     zabbix_agent_allowkeys: "{{ (__radiorabe_zabbix_agent_allow_key + radiorabe_zabbix_agent_extra_allow_key) | unique }}"
