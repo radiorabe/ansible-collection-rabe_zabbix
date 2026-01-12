@@ -13,7 +13,6 @@ from ansible_collections.community.zabbix.plugins.module_utils.base import (
 )  # noqa: E501
 import ansible_collections.community.zabbix.plugins.module_utils.helpers as zabbix_utils  # noqa: E501
 
-
 __metaclass__ = type
 
 

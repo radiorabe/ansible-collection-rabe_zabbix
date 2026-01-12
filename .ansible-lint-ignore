@@ -4,8 +4,15 @@
 galaxy.yml galaxy[no-changelog]
 
 # these will take some work to rename
+roles/agent/tasks/main.yaml var-naming[no-role-prefix]
 roles/agent/defaults/main.yml var-naming[no-role-prefix]
 roles/agent/vars/EL7.yml var-naming[no-role-prefix]
 roles/agent/vars/EL8.yml var-naming[no-role-prefix]
 roles/agent/vars/EL9.yml var-naming[no-role-prefix]
+roles/config/tasks/main.yml var-naming[no-role-prefix]
+roles/config/tasks/host_groups.yml var-naming[no-role-prefix]
+roles/config/tasks/templates.yml var-naming[no-role-prefix]
+roles/config/tasks/user_groups.yml var-naming[no-role-prefix]
 roles/config/defaults/main.yml var-naming[no-role-prefix]
+roles/maintenance_start/tasks/main.yml var-naming[no-role-prefix]
+roles/maintenance_stop/tasks/main.yml var-naming[no-role-prefix]
