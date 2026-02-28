@@ -10,5 +10,7 @@ skip_list:
   - var-naming[no-role-prefix]
   # not currently planned, but would be nice
   - galaxy[no-changelog]
-warn_list:
+  # We still support 2.14 due to EL9, ansible-lint's
+  # opinion on this is values, but not applicable to
+  # our case at the moment.
   - meta-runtime[unsupported-version]
