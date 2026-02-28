@@ -39,3 +39,7 @@ radiorabe_zabbix_categories:
   - "Virtual Machines"
   - "Websites and Webservices"
   - "Windows Servers"
+
+# categories that do not get their alerts routed to the manager on duty by default
+radiorabe_zabbix_mod_exclude_categories:
+  - "Service WWW"
