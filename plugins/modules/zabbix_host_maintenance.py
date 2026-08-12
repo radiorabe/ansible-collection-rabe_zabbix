@@ -84,10 +84,10 @@ class HostUpdate(ZabbixBase):
 def main():
     argument_spec = zabbix_utils.zabbix_common_argument_spec()
     argument_spec.update(
-        dict(
-            hostid=dict(type="str", required=True),
-            maintenance=dict(type="bool", required=True),
-        )
+        {
+            "hostid": {"type": "str", "required": True},
+            "maintenance": {"type": "bool", "required": True},
+        }
     )
     module = AnsibleModule(
         argument_spec=argument_spec,
