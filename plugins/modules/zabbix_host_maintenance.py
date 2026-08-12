@@ -1,20 +1,14 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 # (c) hairmare@rabe.ch
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 
-from __future__ import absolute_import, division, print_function
 
+import ansible_collections.community.zabbix.plugins.module_utils.helpers as zabbix_utils
 from ansible.module_utils.basic import AnsibleModule
-
 from ansible_collections.community.zabbix.plugins.module_utils.base import (
     ZabbixBase,
-)  # noqa: E501
-import ansible_collections.community.zabbix.plugins.module_utils.helpers as zabbix_utils  # noqa: E501
-
-__metaclass__ = type
-
+)
 
 RETURN = r"""
 ---
@@ -74,7 +68,7 @@ EXAMPLES = r"""
   radiorabe.rabe_zabbix.zabbix_host_maintenance:
     hostid: "1"
     maintenance: true # or false to unset
-"""  # noqa: E501
+"""
 
 
 class HostUpdate(ZabbixBase):
@@ -90,10 +84,10 @@ class HostUpdate(ZabbixBase):
 def main():
     argument_spec = zabbix_utils.zabbix_common_argument_spec()
     argument_spec.update(
-        dict(
-            hostid=dict(type="str", required=True),
-            maintenance=dict(type="bool", required=True),
-        )
+        {
+            "hostid": {"type": "str", "required": True},
+            "maintenance": {"type": "bool", "required": True},
+        }
     )
     module = AnsibleModule(
         argument_spec=argument_spec,
